@@ -5,10 +5,11 @@ A real-time competitive math quiz application where multiple users compete to so
 ## Features
 
 - Real-time multiplayer math competition
-- AI-powered math problem generation
+- AI-powered math problem generation with **intelligent prefetching**
 - Fair concurrency handling for simultaneous submissions
 - Live leaderboard and scoring system
 - Network resilience and automatic reconnection
+- **Batch question prefetching** for faster response times
 
 ## Tech Stack
 
@@ -21,9 +22,9 @@ A real-time competitive math quiz application where multiple users compete to so
 **Backend:**
 - FastAPI with Python 3.11
 - Socket.IO for WebSocket management
-- Redis for real-time state management
-- PostgreSQL for persistent storage
-- Google Gemini API for AI problem generation
+- Redis for real-time state management and **question prefetching**
+- **PostgreSQL for persistent storage**
+- Google Gemini API for AI problem generation with **batch optimization**
 
 ## Development Setup
 
@@ -31,8 +32,8 @@ A real-time competitive math quiz application where multiple users compete to so
 
 - Node.js 18+ 
 - Python 3.11+
-- Redis (for development)
-- PostgreSQL (for development)
+- **Redis (REQUIRED)** - The application will not start without Redis
+- **PostgreSQL (REQUIRED)** - For persistent storage
 
 ### Installation
 
@@ -42,27 +43,52 @@ A real-time competitive math quiz application where multiple users compete to so
    npm run install:all
    ```
 
-3. Set up environment variables:
+3. **Set up PostgreSQL database:**
+   ```bash
+   cd backend
+   python setup_postgres.py
+   ```
+
+4. **Start Redis server (REQUIRED):**
+   ```bash
+   # macOS (with Homebrew)
+   brew install redis
+   redis-server --daemonize yes
+   
+   # Ubuntu/Debian
+   sudo apt install redis-server
+   sudo systemctl start redis
+   
+   # Verify Redis is running
+   redis-cli ping  # Should return "PONG"
+   ```
+
+5. Set up environment variables:
    ```bash
    cp backend/.env.example backend/.env
-   # Edit backend/.env with your configuration
+   # Edit backend/.env with your configuration (DATABASE_URL will be set by setup script)
    ```
 
 ### Running the Application
 
-Start both frontend and backend in development mode:
+**Safe startup (recommended):**
 ```bash
+# This will check Redis and start the backend safely
+cd backend
+python start_app.py
+```
+
+**Manual startup:**
+```bash
+# Start both frontend and backend in development mode
 npm run dev
+
+# Or run them separately:
+npm run dev:frontend  # Frontend (http://localhost:3000)
+npm run dev:backend   # Backend (http://localhost:8000)
 ```
 
-Or run them separately:
-```bash
-# Frontend (runs on http://localhost:3000)
-npm run dev:frontend
-
-# Backend (runs on http://localhost:8000)
-npm run dev:backend
-```
+**Important:** The backend will refuse to start if Redis is not running. This prevents runtime errors and ensures proper functionality.
 
 ## Project Structure
 

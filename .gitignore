@@ -76,3 +76,4 @@ backend/.env
 backend/venv/
 backend/alembic/versions/*.py
 !backend/alembic/versions/__init__.py
+/Users/pratikmate/Desktop/Pratik/math-quiz-app/.kiro
