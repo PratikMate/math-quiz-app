@@ -1,97 +1,29 @@
 {
-  "name": "Competitive Math Quiz",
-  "description": "Real-time competitive math quiz application with WebSocket support",
-  "repository": "https://github.com/your-username/competitive-math-quiz",
-  "logo": "https://your-domain.com/logo.png",
-  "keywords": [
-    "math",
-    "quiz",
-    "realtime",
-    "websocket",
-    "competition",
-    "fastapi",
-    "react"
-  ],
-  "stack": "heroku-22",
-  "buildpacks": [
-    {
-      "url": "heroku/python"
+  "name": "Math Quiz App",
+  "description": "Real-time competitive math quiz application",
+  "repository": "https://github.com/PratikMate/math-quiz-app",
+  "keywords": ["python", "fastapi", "socketio", "math", "quiz"],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Secret key for the application",
+      "value": "math-quiz-secret-key-production-2025"
     },
-    {
-      "url": "heroku/nodejs"
-    }
-  ],
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "basic"
+    "CORS_ORIGINS": {
+      "description": "Allowed CORS origins",
+      "value": "*"
+    },
+    "DEBUG": {
+      "description": "Debug mode",
+      "value": "false"
     }
   },
   "addons": [
-    {
-      "plan": "heroku-postgresql:mini",
-      "as": "DATABASE"
-    },
-    {
-      "plan": "heroku-redis:mini",
-      "as": "REDIS"
-    }
+    "heroku-postgresql:essential-0",
+    "heroku-redis:mini"
   ],
-  "env": {
-    "ENVIRONMENT": {
-      "description": "Application environment",
-      "value": "production"
-    },
-    "DEBUG": {
-      "description": "Enable debug mode",
-      "value": "false"
-    },
-    "LOG_LEVEL": {
-      "description": "Logging level",
-      "value": "INFO"
-    },
-    "CORS_ORIGINS": {
-      "description": "Allowed CORS origins (comma-separated)",
-      "value": "https://your-frontend-domain.herokuapp.com"
-    },
-    "GEMINI_API_KEY": {
-      "description": "Google Gemini API key for math problem generation",
-      "required": true
-    },
-    "SECRET_KEY": {
-      "description": "Secret key for application security",
-      "generator": "secret"
-    },
-    "MAX_CONCURRENT_USERS": {
-      "description": "Maximum number of concurrent users",
-      "value": "100"
-    },
-    "RATE_LIMIT_PER_MINUTE": {
-      "description": "Rate limit per minute per IP",
-      "value": "60"
-    },
-    "DATABASE_POOL_SIZE": {
-      "description": "Database connection pool size",
-      "value": "20"
-    },
-    "REDIS_POOL_SIZE": {
-      "description": "Redis connection pool size",
-      "value": "20"
+  "buildpacks": [
+    {
+      "url": "heroku/python"
     }
-  },
-  "scripts": {
-    "postdeploy": "cd backend && alembic upgrade head"
-  },
-  "environments": {
-    "test": {
-      "addons": [
-        "heroku-postgresql:mini",
-        "heroku-redis:mini"
-      ],
-      "env": {
-        "DEBUG": "true",
-        "LOG_LEVEL": "DEBUG"
-      }
-    }
-  }
+  ]
 }
