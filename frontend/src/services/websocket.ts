@@ -84,7 +84,7 @@ export class WebSocketService {
   /**
    * Connect to the WebSocket server with automatic reconnection and exponential backoff
    */
-  connect(username?: string, difficulty?: string): Promise<void> {
+  connect(username?: string, _difficulty?: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (this.socket?.connected) {
         resolve();
