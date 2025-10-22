@@ -1,0 +1,45 @@
+# Files to exclude from Heroku slug to reduce size
+
+# Development files
+*.md
+README.md
+HEROKU_DEPLOYMENT.md
+.kiro/
+.vscode/
+.git/
+
+# Frontend development files
+frontend/src/
+frontend/node_modules/
+frontend/.env
+frontend/.env.example
+frontend/vite.config.ts
+frontend/tsconfig.json
+frontend/tsconfig.node.json
+frontend/tailwind.config.js
+frontend/postcss.config.js
+
+# Backend development files
+backend/venv/
+backend/.env
+backend/.env.example
+backend/.env.production
+backend/__pycache__/
+backend/app/__pycache__/
+backend/quiz_app.db
+
+# Test files
+**/tests/
+**/*test.py
+**/*_test.py
+**/test_*.py
+
+# Documentation
+docs/
+*.txt
+LICENSE
+
+# Development tools
+.eslintrc.*
+.prettierrc.*
+deploy.sh
