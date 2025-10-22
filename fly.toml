@@ -1,4 +1,4 @@
-app = "math-quiz-app"
+app = "math-quiz-backend-free"
 primary_region = "sin"
 
 [build]
