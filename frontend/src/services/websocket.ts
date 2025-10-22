@@ -107,7 +107,7 @@ export class WebSocketService {
         );
 
         this.socket = io(this.serverUrl, {
-          transports: ['websocket', 'polling'],
+          transports: ['polling'],
           timeout: 10000,
           reconnection: true,
           reconnectionAttempts: this.maxReconnectAttempts,
